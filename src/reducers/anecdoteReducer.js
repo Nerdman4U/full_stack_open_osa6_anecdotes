@@ -53,7 +53,7 @@ const vote = (anecdote) => {
 const newAnecdote = (data) => {
   return {
     type: 'NEW_ANECDOTE',
-    data
+    data: data
   }
 }
 
