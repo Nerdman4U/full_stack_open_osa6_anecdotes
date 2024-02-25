@@ -1,13 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux'
 
-const App = () => {
-  const anecdotes = useSelector(state => state.sort((a,b) => b.votes - a.votes))
+const AddNew = () => {
   const dispatch = useDispatch()
 
-  const vote = (id) => {
-    console.log('vote', id)
-    dispatch({ type: 'VOTE', id: id })
-  }
   const newAnecdote = (data) => {
     console.log('create', data)
     dispatch({ type: 'NEW_ANECDOTE', data: data })
@@ -21,6 +16,30 @@ const App = () => {
   }
 
   return (
+    <>
+    <h2 className="text-5xl font-bold">Create new</h2>
+    <form onSubmit={handleAddNew}>
+      <div className="my-4">
+        <input name="anecdote" className="shadow appearance-none border border-blue-500 w-5/6 rounded py-2 px-3 mr-2 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"/>
+        <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">create</button>
+      </div>
+    </form>
+    </>    
+  )
+  
+}
+
+const App = () => {
+  const anecdotes = useSelector(state => state.sort((a,b) => b.votes - a.votes))
+  const dispatch = useDispatch()
+
+  const vote = (id) => {
+    console.log('vote', id)
+    dispatch({ type: 'VOTE', id: id })
+  }
+
+  return (
+    <>
     <div className="p-12">
       <h2 className='text-5xl font-bold'>Anecdotes</h2>
       <div className="columns-3">
@@ -38,15 +57,11 @@ const App = () => {
         </div>
       )}
       </div>
-      <h2 className="text-5xl font-bold">Create new</h2>
-      <form onSubmit={handleAddNew}>
-        <div className="my-4">
-          <input name="anecdote" className="shadow appearance-none border border-blue-500 w-5/6 rounded py-2 px-3 mr-2 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"/>
-          <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">create</button>
-        </div>
-      </form>
+      <AddNew />
     </div>
+    </>
   )
 }
 
 export default App
+
