@@ -16,10 +16,10 @@ describe("filterReducer", () => {
 
     it("filters", () => {
       const action = {
-        type: 'FILTER',
-        data: 'new filter'
+        type: 'filter/createFilter',
+        payload: 'new filter'
       }
-      const state = reducer(undefined, action)
+      const state = reducer("old filter", action)
       expect(state).toEqual("new filter")
     })
 
