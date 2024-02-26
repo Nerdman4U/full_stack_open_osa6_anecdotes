@@ -20,8 +20,8 @@ describe("anecdoteReducer", () => {
     it('votes', () => {
       const a = initialState[0]
       const action = {
-        type: 'VOTE',
-        id: a.id
+        type: 'anecdotes/vote',
+        payload: { id: a.id }
       }
       const state = reducer(initialState, action)
       expect(state[0].votes).toBe(1)
@@ -29,7 +29,7 @@ describe("anecdoteReducer", () => {
 
     it('throws an error when no id', () => {
       const action = {
-        type: 'VOTE'
+        type: 'anecdotes/vote'
       }     
       expect(() => reducer(initialState, action)).toThrow()
     })
@@ -37,8 +37,8 @@ describe("anecdoteReducer", () => {
     it('creates new anecdote', () => {
       const data = 'new amazing anecdote is better than no anecdote at all'
       const action = {
-        type: 'NEW_ANECDOTE',
-        data
+        type: 'anecdotes/newAnecdote',
+        payload: data
       }
       const old_length = initialState.length
       const state = reducer(initialState, action)

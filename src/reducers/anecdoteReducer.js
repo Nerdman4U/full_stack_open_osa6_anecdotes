@@ -1,13 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-//import anecdotesAtStart from './anecdotes'
-const anecdotesAtStart = [
-  'If it hurts, do it more often',
-  'Adding manpower to a late software project makes it later!',
-  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-  'Premature optimization is the root of all evil.',
-  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-]
+import anecdotesAtStart from './anecdotes'
 
 const getId = () => Date.now()+Math.floor(Math.random()*1000)
 
@@ -19,7 +11,6 @@ const asObject = (anecdote) => {
   }
 }
 
-console.log('anecdotes:', anecdotesAtStart)
 const initialState = anecdotesAtStart.map(asObject)
 
 const anecdoteSlice = createSlice({
@@ -28,9 +19,9 @@ const anecdoteSlice = createSlice({
   reducers: {
     vote(state, action) {
       const id = action.payload.id
-      console.log('10 recucer VOTE state.anecdotes:', state, 'action:', action)
+      //console.log('10 recucer VOTE state.anecdotes:', state, 'action:', action)
       const anecdoteToChange = state.find(a => a.id === id)
-      console.log('20 recucer VOTE anecdoteToChange:', anecdoteToChange, 'id:', id)
+      //console.log('20 recucer VOTE anecdoteToChange:', anecdoteToChange, 'id:', id)
       const changedAnecdote = {
         ...anecdoteToChange,
         votes: anecdoteToChange.votes + 1
@@ -46,7 +37,13 @@ const anecdoteSlice = createSlice({
 })
 
 export default anecdoteSlice.reducer
-export const { vote, newAnecdote } = anecdoteSlice.actions
+export const { 
+  vote, 
+  newAnecdote,
+} = anecdoteSlice.actions
+export { 
+  initialState 
+}
 
 // const vote = (anecdote) => {  
 //   return {

@@ -11,9 +11,8 @@ const AnecdoteList = () => {
     if (state.filter) {
       anecdotes = state.anecdotes.filter(a => a.content.includes(state.filter))      
     }
-    // const anecdotes2 = anecdotes.sort((a,b) => b.votes - a.votes)
-    // return anecdotes2
-    return anecdotes
+    const arrayForSort = [...anecdotes]
+    return arrayForSort.sort((a,b) => b.votes - a.votes )
   })
 
   console.log('AnecdoteList toBeViewed:', toBeViewed)
