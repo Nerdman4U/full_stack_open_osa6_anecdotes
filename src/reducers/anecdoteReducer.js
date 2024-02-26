@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit'
+//import anecdotesAtStart from './anecdotes'
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -17,18 +19,18 @@ const asObject = (anecdote) => {
   }
 }
 
+console.log('anecdotes:', anecdotesAtStart)
 const initialState = anecdotesAtStart.map(asObject)
 
-const reducer = (state = initialState, action) => {
-  // console.log('state now: ', state)
-  // console.log('action', action)
-
-  switch (action.type) {
-    case 'VOTE': {
-      const id = action.id
+const anecdoteSlice = createSlice({
+  name: 'anecdotes',
+  initialState,
+  reducers: {
+    vote(state, action) {
+      const id = action.payload.id
       console.log('10 recucer VOTE state.anecdotes:', state, 'action:', action)
       const anecdoteToChange = state.find(a => a.id === id)
-      console.log('20 recucer VOTE state.anecdotes:', anecdoteToChange, id)
+      console.log('20 recucer VOTE anecdoteToChange:', anecdoteToChange, 'id:', id)
       const changedAnecdote = {
         ...anecdoteToChange,
         votes: anecdoteToChange.votes + 1
@@ -36,32 +38,34 @@ const reducer = (state = initialState, action) => {
       return state.map(anecdote =>
         anecdote.id !== id ? anecdote : changedAnecdote
       )
-    }
-
-    case 'NEW_ANECDOTE': 
-      return [...state, asObject(action.data)]
-    default:
-      return state
+    },
+    newAnecdote(state, action) {
+      return [...state, asObject(action.payload)]
+    }  
   }
-}
+})
 
-const vote = (anecdote) => {  
-  return {
-    type: 'VOTE',
-    id: anecdote.id
-  }
-}
+export default anecdoteSlice.reducer
+export const { vote, newAnecdote } = anecdoteSlice.actions
 
-const newAnecdote = (data) => {
-  return {
-    type: 'NEW_ANECDOTE',
-    data: data
-  }
-}
+// const vote = (anecdote) => {  
+//   return {
+//     type: 'VOTE',
+//     id: anecdote.id
+//   }
+// }
 
-export default reducer
-export {
-  vote,
-  newAnecdote,
-  initialState
-}
+// const newAnecdote = (data) => {
+//   return {
+//     type: 'NEW_ANECDOTE',
+//     data: data
+//   }
+// }
+
+// export default reducer
+// export {
+//   vote,
+//   newAnecdote,
+//   initialState
+// }
+
