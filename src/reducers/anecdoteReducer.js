@@ -45,24 +45,3 @@ export {
   initialState 
 }
 
-// const vote = (anecdote) => {  
-//   return {
-//     type: 'VOTE',
-//     id: anecdote.id
-//   }
-// }
-
-// const newAnecdote = (data) => {
-//   return {
-//     type: 'NEW_ANECDOTE',
-//     data: data
-//   }
-// }
-
-// export default reducer
-// export {
-//   vote,
-//   newAnecdote,
-//   initialState
-// }
-

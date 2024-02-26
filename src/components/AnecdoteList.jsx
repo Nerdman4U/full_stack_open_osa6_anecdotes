@@ -1,21 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { vote } from '../reducers/anecdoteReducer'
+//import { createSelector } from '@reduxjs/toolkit'
+//https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization
 
 const AnecdoteList = () => {
   const dispatch = useDispatch()
 
   const toBeViewed = useSelector(state => {
-    console.log('AnecdoteList state:', state)
     let anecdotes = state.anecdotes
-    console.log('AnecdoteList state.filter:', state.filter, 'anecdotes:', anecdotes)
     if (state.filter) {
       anecdotes = state.anecdotes.filter(a => a.content.includes(state.filter))      
     }
     const arrayForSort = [...anecdotes]
     return arrayForSort.sort((a,b) => b.votes - a.votes )
   })
-
-  console.log('AnecdoteList toBeViewed:', toBeViewed)
 
   return (
     <>
