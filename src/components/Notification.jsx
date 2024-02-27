@@ -11,10 +11,15 @@ const Notification = () => {
     dispatch(createNotification({timeout:0, message:""}))
   }
 
-  const clickHandler = () => {
+  const clickHandler = (e) => {
     hide()
   }
-  
+
+  const css = () => {
+    console.log('css notification:', notification)
+    return `notification w-full p-12 rotate-${notification.rotate} bg-purple-500 text-content text-white rounded text-center absolute`
+  }
+
   useEffect(() => {
     setTimeout(() => {
       hide()
@@ -24,7 +29,7 @@ const Notification = () => {
   if (!notification.message) { return null }
   else {
     return (
-      <div onClick={clickHandler} className="notification w-full p-12 rotate-45 bg-purple-500 text-content text-white rounded text-center absolute">
+      <div onClick={clickHandler} className={css()}>
         { notification.message }
       </div>
     )  
