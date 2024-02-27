@@ -1,3 +1,5 @@
+import { asObject } from "../reducers/anecdoteReducer"
+
 const baseurl = 'http://localhost:5173/anecdotes'
 
 const getAll = async () => {
@@ -9,7 +11,19 @@ const getAll = async () => {
     })
 }
 
+const createNew = async (anecdote) => {
+  const obj = asObject(anecdote)
+  return fetch(baseurl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  }).then(res => res.json())
+}
+
 
 export {
-  getAll
+  getAll,
+  createNew
 }

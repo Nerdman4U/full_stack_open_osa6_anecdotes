@@ -31,7 +31,7 @@ const anecdoteSlice = createSlice({
       )
     },
     newAnecdote(state, action) {
-      return [...state, asObject(action.payload)]
+      return [...state, action.payload]
     },
     appendNote(state, action) {
       state.push(action.payload)
@@ -50,6 +50,7 @@ export const {
   setNotes
 } = anecdoteSlice.actions
 export { 
-  initialState 
+  initialState,
+  asObject
 }
 
