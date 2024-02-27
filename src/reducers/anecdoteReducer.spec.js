@@ -5,8 +5,7 @@ import { initialState } from "./anecdoteReducer";
 
 describe("anecdoteReducer", () => {
   
-  beforeEach(() => {  
-  })
+  beforeEach(() => {})
 
   describe('basics', () => {
 

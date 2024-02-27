@@ -12,7 +12,7 @@ const AnecdoteList = () => {
       anecdotes = state.anecdotes.filter(a => a.content.includes(state.filter))      
     }
     const arrayForSort = [...anecdotes]
-    return arrayForSort.sort((a,b) => b.votes - a.votes )
+    return arrayForSort.sort((a,b) => b.votes - a.votes) 
   })
 
   return (

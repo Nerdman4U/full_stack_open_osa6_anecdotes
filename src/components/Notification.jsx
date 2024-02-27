@@ -9,7 +9,7 @@ const Notification = () => {
     dispatch(createNotification(""))
   }
 
-  const clickHandler = (e) => {
+  const clickHandler = () => {
     hide()
   }
   
