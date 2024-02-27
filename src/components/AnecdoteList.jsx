@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { vote } from '../reducers/anecdoteReducer'
+import { modify } from '../reducers/anecdoteReducer'
 //import { createSelector } from '@reduxjs/toolkit'
 //https://redux.js.org/usage/deriving-data-selectors#optimizing-selectors-with-memoization
 
@@ -11,6 +11,7 @@ const AnecdoteList = () => {
     if (state.filter) {
       anecdotes = state.anecdotes.filter(a => a.content.includes(state.filter))      
     }
+    //console.log('AnecdoteList anecdotes:', anecdotes)
     const arrayForSort = [...anecdotes]
     return arrayForSort.sort((a,b) => b.votes - a.votes) 
   })
@@ -27,8 +28,8 @@ const AnecdoteList = () => {
           <div className="w-1/6 mr-2">
             has {anecdote.votes} votes. 
           </div>
-          <div className="">  
-            <button onClick={() => dispatch(vote(anecdote))} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Vote </button>
+          <div className="">
+            <button onClick={() => dispatch(modify(anecdote))} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Vote </button>
           </div>
         </div>
       )}

@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import anecdotesAtStart from './anecdotes'
 import { getAll } from '../services/anecdotes'
-import { create } from '../services/anecdotes'
+import { create, update } from '../services/anecdotes'
 
-const getId = () => Date.now()+Math.floor(Math.random()*1000)
+const getId = () => `${Date.now()+Math.floor(Math.random()*1000)}`
 
 const asObject = (anecdote) => {
   return {
@@ -28,21 +28,30 @@ const add = (content) => {
   }
 }
 
+const modify = (obj) => {
+  console.log('modify: obj:', obj)
+  return async dispatch => {
+    const changedAnecdote = {
+      ...obj,
+      votes: obj.votes + 1
+    }
+    const result = await update(changedAnecdote)
+    console.log('modify: result:', result)
+    return dispatch(vote(result))
+  }
+}
+
 const anecdoteSlice = createSlice({
   name: 'anecdotes',
   initialState: [],
   reducers: {
     vote(state, action) {
       const id = action.payload.id
-      //console.log('10 recucer VOTE state.anecdotes:', state, 'action:', action)
+      console.log('10 recucer VOTE state.anecdotes:', state, 'action:', action)
       const anecdoteToChange = state.find(a => a.id === id)
-      //console.log('20 recucer VOTE anecdoteToChange:', anecdoteToChange, 'id:', id)
-      const changedAnecdote = {
-        ...anecdoteToChange,
-        votes: anecdoteToChange.votes + 1
-      }
+      console.log('20 recucer VOTE anecdoteToChange:', JSON.parse(JSON.stringify(anecdoteToChange)), 'id:', id)
       return state.map(anecdote =>
-        anecdote.id !== id ? anecdote : changedAnecdote
+        anecdote.id !== id ? anecdote : action.payload
       )
     },
     appendNote(state, action) {
@@ -50,6 +59,11 @@ const anecdoteSlice = createSlice({
     },
     setNotes(state, action) {
       return action.payload
+    },
+    replace(state, action) {
+      return state.map(anecdote =>
+        anecdote.id !== action.payload.id ? anecdote : action.payload
+      )
     }
   }
 })
@@ -59,12 +73,14 @@ export const {
   vote, 
   newAnecdote,
   appendNote,
-  setNotes
+  setNotes,
+  replace
 } = anecdoteSlice.actions
 export { 
   initialState,
   initialize,
   asObject,
-  add
+  add,
+  modify
 }
 

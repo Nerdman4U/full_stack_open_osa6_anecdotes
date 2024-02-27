@@ -9,7 +9,7 @@ const AnecdoteForm = () => {
     event.preventDefault()
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
-    console.log('handleAddNew content:', content)
+    //console.log('handleAddNew content:', content)
     dispatch(createNotification(`Added '${content}'`))
     dispatch(add(content))
   }
