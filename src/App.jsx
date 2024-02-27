@@ -5,17 +5,16 @@ import AnecdoteList from "./components/AnecdoteList"
 import Filter from "./components/Filter"
 import Notification from "./components/Notification"
 
-import { getAll } from './services/anecdotes'
-
-import { setNotes } from './reducers/anecdoteReducer'
+import { initialize } from './reducers/anecdoteReducer'
 
 import { useDispatch } from "react-redux"
 
 export default function App() {
   const dispatch = useDispatch()
+
   useEffect(() => {
-    getAll().then(data => dispatch(setNotes(data)))
-  })
+    dispatch(initialize())
+  }, [dispatch])
 
   return (
     <div className="p-12">

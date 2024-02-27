@@ -11,7 +11,7 @@ const getAll = async () => {
     })
 }
 
-const createNew = async (anecdote) => {
+const create = async (anecdote) => {
   const obj = asObject(anecdote)
   return fetch(baseurl, {
     method: 'POST',
@@ -22,8 +22,17 @@ const createNew = async (anecdote) => {
   }).then(res => res.json())
 }
 
+// const modify = async (obj) => {
+//   return fetch(`${baseurl}/${obj.id}`, {
+//     method: 'PUT',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(obj)
+//   }).then(res => res.json())
+// }
 
 export {
   getAll,
-  createNew
+  create
 }

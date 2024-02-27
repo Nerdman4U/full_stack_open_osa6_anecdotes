@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux"
-import { newAnecdote } from '../reducers/anecdoteReducer'
+import { add } from '../reducers/anecdoteReducer'
 import { createNotification } from '../reducers/notificationReducer'
-import { createNew } from '../services/anecdotes'
 
 const AnecdoteForm = () => {
   const dispatch = useDispatch()
@@ -12,11 +11,7 @@ const AnecdoteForm = () => {
     event.target.anecdote.value = ''
     console.log('handleAddNew content:', content)
     dispatch(createNotification(`Added '${content}'`))
-
-    createNew(content).then(created => {
-      console.log('handleAddNew() created:', created)
-      dispatch(newAnecdote(created))
-    })
+    dispatch(add(content))
   }
 
   return (
