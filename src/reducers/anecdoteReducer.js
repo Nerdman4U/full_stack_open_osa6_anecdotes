@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import anecdotesAtStart from './anecdotes'
 import { getAll } from '../services/anecdotes'
 import { create, update } from '../services/anecdotes'
+import { setNotification } from './notificationReducer'
 
 const getId = () => `${Date.now()+Math.floor(Math.random()*1000)}`
 
@@ -24,6 +25,7 @@ const initialize = () => {
 const add = (content) => {
   return async dispatch => {
     const anecdote = await create(content)
+    dispatch(setNotification(`Added '${content}'`, 1))
     return dispatch(appendNote(anecdote))
   }
 }
@@ -37,6 +39,7 @@ const modify = (obj) => {
     }
     const result = await update(changedAnecdote)
     console.log('modify: result:', result)
+    dispatch(setNotification(`you voted '${obj.content}'`, 10))
     return dispatch(vote(result))
   }
 }

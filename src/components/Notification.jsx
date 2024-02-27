@@ -4,9 +4,11 @@ import { createNotification } from "../reducers/notificationReducer"
 
 const Notification = () => {
   const dispatch = useDispatch()
+  const notification = useSelector(state => state.notification)
+  console.log('notification:', notification)
 
   const hide = () => {
-    dispatch(createNotification(""))
+    dispatch(createNotification({timeout:0, message:""}))
   }
 
   const clickHandler = () => {
@@ -14,20 +16,16 @@ const Notification = () => {
   }
   
   useEffect(() => {
-    console.log('useEffect()')
     setTimeout(() => {
       hide()
-    }, 5000)
-  })
+    }, notification.timeout)
+  }, [])
 
-  const notification = useSelector(state => state.notification)
-  if (notification === "") {
-    return null
-  }
+  if (!notification.message) { return null }
   else {
     return (
       <div onClick={clickHandler} className="notification w-full p-12 rotate-45 bg-purple-500 text-content text-white rounded text-center absolute">
-        { notification }
+        { notification.message }
       </div>
     )  
   }
