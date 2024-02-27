@@ -26,7 +26,7 @@ const Notification = () => {
   }
   else {
     return (
-      <div onClick={clickHandler} className="notification w-full p-12 rotate-45 bg-purple-500 text-content text-white rounded text-center relative">
+      <div onClick={clickHandler} className="notification w-full p-12 rotate-45 bg-purple-500 text-content text-white rounded text-center absolute">
         { notification }
       </div>
     )  
